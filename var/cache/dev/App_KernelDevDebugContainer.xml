@@ -512,7 +512,7 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SecurityController"/>
       </call>
     </service>
-    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
+    <service id="App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
     <service id="App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" autoconfigure="true">
@@ -5677,7 +5677,7 @@
       <call method="addFixtures">
         <argument type="collection">
           <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\AppFixtures"/>
+            <argument key="fixture" type="service" id="App\DataFixtures\FaqFixtures"/>
             <argument key="groups" type="collection"/>
           </argument>
         </argument>
@@ -6691,8 +6691,8 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContactType" class="App\Form\ContactType" autowire="true" abstract="true"/>
