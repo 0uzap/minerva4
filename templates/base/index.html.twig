@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}Accueil
+{% endblock %}
+
+{% block body %}
+
+	<div class="carrousel-container my-5">
+		<span class="material-symbols-outlined arrow left-arrow" id="btavant">
+			navigate_before
+		</span>
+		<ul id="carrousel">
+			<li class="carou">
+				<img src="image/festiparis.jpg" class="d-block w-100" alt="paris">
+			</li>
+			<li class="carou">
+				<img src="image/bdangouleme.jpeg" class="d-block w-100" alt="bdangoueleme">
+			</li>
+			<li class="carou">
+				<img src="image/saintmalo.jpeg" class="d-block w-100" alt="saintmalo">
+			</li>
+			<li class="carou">
+				<img src="image/salonlivre.jpeg" class="d-block w-100" alt="salonlivre">
+			</li>
+		</ul>
+		<span class="material-symbols-outlined arrow right-arrow" id="btafter">
+			navigate_next
+		</span>
+	</div>
+
+	<div class="genres-filter text-center my-5">
+		<h3>
+			Filtrer par genres
+		</h3>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input genre-checkbox" type="checkbox" id="aventure">
+			<label class="form-check-label">
+				Aventure
+			</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input genre-checkbox" type="checkbox" id="science-fiction">
+			<label class="form-check-label">
+				Science Fiction
+			</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input genre-checkbox" type="checkbox" id="fantasy">
+			<label class="form-check-label">
+				Fantasy
+			</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input genre-checkbox" type="checkbox" id="post-apocalyptique">
+			<label class="form-check-label">
+				Post Apocalyptique
+			</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input genre-checkbox" type="checkbox" id="humoristique">
+			<label class="form-check-label">
+				Humoristique
+			</label>
+		</div>
+	</div>
+
+
+	<div class="d-flex flex-wrap justify-content-center">
+		{% for l in livre %}
+			<div class="card m-2 livre-card" style="max-width: 540px;">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="image/couverture/{{l.couverture}}" alt={{l.couverture}} class="img-fluid rounded-start">
+						<p class="card-text mt-4 ms-2">
+							<small class="text-muted">{{l.editeur}}</small>
+						</p>
+						{#<p class="card-text ms-2">
+													<small class="text-muted">{{l.format}}</small>
+												</p>#}
+						<p class="card-text ms-2">
+							<strong>{{l.prix|number_format(2)}}
+								<sup>€</sup>
+							</strong>
+						</p>
+						<p class="card-text ms-2 test">
+							<strong id="{{l.genre.nomgenre}}" class="hidden">{{ l.genre.nomgenre }}
+							</strong>
+						</p>
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h4 class="card-title">{{l.titre}}</h4>
+							<p class="card-text mt-3">{{l.auteur}}</p>
+							<p class="card-text mt-4 overflow-auto" style="height: 282px">{{l.resume}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{% if is_granted ('IS_AUTHENTICATED_FULLY') %}
+						{% if app.user %}
+							{#{% if l in app.user.favories %}
+															<a href="{{path('favorie', {'id': l.id, 'action': 'supprimer'}) }}" class="btn btn-secondary">
+																<span class="material-symbols-outlined">
+																	bookmark_added
+																</span>
+															</a>
+														{% else %}
+															<a href="{{path('favorie', {'id': l.id, 'action': 'ajouter'}) }}" class="btn btn-secondary">
+																<span class="material-symbols-outlined">
+																	bookmark_add
+																</span>
+															</a>
+														{% endif %}#}
+							{% else %}
+							{#<button class="btn btn-secondary">
+															<span class="material-symbols-outlined">
+																bookmark
+															</span>
+														</button>#}
+						{% endif %}
+						<a href="{{path('detail', {'id': l.id}) }}" class="btn btn-secondary">
+							<span class="material-symbols-outlined">
+								open_in_new
+							</span>
+						</a>
+						<a href="{{path('ajoutPanier', {'id': l.id}) }}" class="btn btn-secondary">
+							<span>
+								ACHETER
+							</span>
+						</a>
+					{% endif %}
+					{% if not is_granted ('IS_AUTHENTICATED_FULLY') %}
+						{#<a href="{{path('app_login', {'id': l.id}) }}" class="btn btn-secondary">
+													<span class="material-symbols-outlined">
+														bookmark
+													</span>
+												</a>#}
+						<a href="{{path('detail', {'id': l.id}) }}" class="btn btn-secondary">
+							<span class="material-symbols-outlined">
+								open_in_new
+							</span>
+						</a>
+						<a href="{{path('app_login', {'id': l.id}) }}" class="btn btn-secondary">
+							<span>
+								ACHETER
+							</span>
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+{% endblock %}
+

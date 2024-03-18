@@ -1,0 +1,14 @@
+.genres-filter {
+    margin-top: 20px;;
+}
+
+.livre-card {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Bande dessinée
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap justify-content-center">
+        {% for livre in livre %}
+            <div class="card m-2" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('image/couverture/' ~ livre.couverture) }}" alt="{{ livre.couverture }}" class="img-fluid rounded-start">
+                        <p class="card-text mt-4 ms-2">
+                            <small class="text-muted">{{ livre.editeur }}</small>
+                        </p>
+                        <p class="card-text ms-2">
+                            <small class="text-muted">{{ livre.format }}</small>
+                        </p>
+                        <p class="card-text ms-2">
+                            <strong>{{ livre.prix|number_format(2) }}<sup>€</sup></strong>
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ livre.titre }}</h4>
+                            <p class="card-text mt-3">{{ livre.auteur }}</p>
+                            <p class="card-text mt-4 overflow-auto" style="height: 282px">{{ livre.resume }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    {% if app.user %}
+                    <a href="{{ path('detail', {'id': livre.id}) }}" class="btn btn-secondary">
+                        <span class="material-symbols-outlined">open_in_new</span>
+                    </a>
+                    <a href="{{ path('ajoutPanier', {'id': livre.id}) }}" class="btn btn-secondary">
+                        <span>ACHETER</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

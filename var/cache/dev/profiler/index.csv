@@ -1,0 +1,7 @@
+894ef5,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/,1710753602,,200
+862d1f,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/login,1710753609,,200
+36af1a,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,POST,http://s3-4677.nuage-peda.fr/Minerva3/public/login,1710753618,,302
+6d0423,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/,1710753618,,200
+d3f6ca,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/ajoutPanier/2,1710753621,,302
+59322a,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/,1710753621,,200
+123c9c,fd42:e728:56ba:95c1:216:3eff:fe8a:c2ed,GET,http://s3-4677.nuage-peda.fr/Minerva3/public/monPanier,1710753623,,200

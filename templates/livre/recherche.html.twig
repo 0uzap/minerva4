@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}Livres
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<h1 class="text-center text-primary mt-4 pt-4 fw-bold">
+		Liste des Livres</h1>
+
+
+	{% if livres == [] %}
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8 bg-white p-4 m-0 text-primary">
+				<h4 class="text-black">
+					Aucuns résultats n'ont été trouvés pour votre recherche :
+					{{query}}</h4>
+			</div>
+		</div>
+
+	{% else %}
+
+		<div class="container">
+			<div class="row g-3">
+				{% for l in livres %}
+					<div class="card m-auto col-6 col-md-4 mt-5 " style="max-width: 540px;">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="image/couverture/{{l.couverture}}" alt={{l.couverture}} class="img-fluid rounded-start">
+								<p class="card-text mt-4 ms-2">
+									<small class="text-muted">{{l.editeur}}</small>
+								</p>
+								{#<p class="card-text ms-2">
+																										<small class="text-muted">{{l.format}}</small>
+																									</p>#}
+								<p class="card-text ms-2">
+									<strong>{{l.prix|number_format(2)}}
+										<sup>€</sup>
+									</strong>
+								</p>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h4 class="card-title">{{l.titre}}</h4>
+									<p class="card-text mt-3">{{l.auteur}}</p>
+									<p class="card-text mt-4 overflow-auto" style="height: 282px">{{l.resume}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							{% if is_granted ('IS_AUTHENTICATED_FULLY') %}
+								{% if app.user %}
+									{#{% if l in app.user.favories %}
+																													<a href="{{path('favorie', {'id': l.id, 'action': 'supprimer'}) }}" class="btn btn-secondary">
+																														<span class="material-symbols-outlined">
+																															bookmark_added
+																														</span>
+																													</a>
+																												{% else %}
+																													<a href="{{path('favorie', {'id': l.id, 'action': 'ajouter'}) }}" class="btn btn-secondary">
+																														<span class="material-symbols-outlined">
+																															bookmark_add
+																														</span>
+																													</a>
+																												{% endif %}#}
+								{% else %}
+									<button class="btn btn-secondary">
+										<span class="material-symbols-outlined">
+											bookmark
+										</span>
+									</button>
+								{% endif %}
+								<a href="{{path('detail', {'id': l.id}) }}" class="btn btn-secondary">
+									<span class="material-symbols-outlined">
+										open_in_new
+									</span>
+								</a>
+								<a href="{{path('ajoutPanier', {'id': l.id}) }}" class="btn btn-secondary">
+									<span>
+										ACHETER
+									</span>
+								</a>
+							{% endif %}
+							{% if not is_granted ('IS_AUTHENTICATED_FULLY') %}
+								<a href="{{path('app_login', {'id': l.id}) }}" class="btn btn-secondary">
+									<span class="material-symbols-outlined">
+										bookmark
+									</span>
+								</a>
+								<a href="{{path('detail', {'id': l.id}) }}" class="btn btn-secondary">
+									<span class="material-symbols-outlined">
+										open_in_new
+									</span>
+								</a>
+								<a href="{{path('app_login', {'id': l.id}) }}" class="btn btn-secondary">
+									<span>
+										ACHETER
+									</span>
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>{% endif %}
+<br><br>
+{% endblock %}
