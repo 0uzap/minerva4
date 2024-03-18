@@ -44,7 +44,7 @@ final class ErrorNormalizer implements NormalizerInterface, CacheableSupportsMet
     /**
      * {@inheritdoc}
      */
-    public function normalize(mixed $object, string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         // TODO: in api platform 4 this will be the default, note that JSON:API is close to Problem so we should use the same normalizer
         if ($context['rfc_7807_compliant_errors'] ?? false) {
@@ -56,6 +56,7 @@ final class ErrorNormalizer implements NormalizerInterface, CacheableSupportsMet
             $jsonApiObject = $this->itemNormalizer->normalize($object, $format, $context);
             $error = $jsonApiObject['data']['attributes'];
             $error['id'] = $jsonApiObject['data']['id'];
+            $error['type'] = $jsonApiObject['data']['id'];
 
             return ['errors' => [$error]];
         }
@@ -79,7 +80,7 @@ final class ErrorNormalizer implements NormalizerInterface, CacheableSupportsMet
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return self::FORMAT === $format && ($data instanceof \Exception || $data instanceof FlattenException);
     }

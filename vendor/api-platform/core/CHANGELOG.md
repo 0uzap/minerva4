@@ -1,5 +1,97 @@
 # Changelog
 
+## v3.2.17
+
+### Bug fixes
+
+* [2819d56c8](https://github.com/api-platform/core/commit/2819d56c80f39a53f2e3d5fd7119566ad96b4075) fix(hydra): hydra:view with absolute iris (#6208)
+* [98f4b8fca](https://github.com/api-platform/core/commit/98f4b8fcab39b1d09110cc133206e27782ea4791) fix(metadata): Operations priority sort (#6206)
+* [a1309bbf2](https://github.com/api-platform/core/commit/a1309bbf2f678081a82290818a91f0a376b3c94c) fix(serializer): skip symfony validation exception (#6220)
+
+## v3.2.16
+
+### Bug fixes
+
+* [56744dcfa](https://github.com/api-platform/core/commit/56744dcfa07f79ca58926cb199356e849ddb3a93) fix(serializer): fix union types on collection denormalization (#6192)
+* [d8e2d0c5e](https://github.com/api-platform/core/commit/d8e2d0c5e9b48c15d60a734086b0102b6ecf95c8) fix(doctrine): doctrine/orm:^3.0 support (#6193)
+* [f891f16d5](https://github.com/api-platform/core/commit/f891f16d50b665f25e4699291526161e16ce0fa7) fix(doctrine): isAssociationInverseSide before getMappedBy (#6197)
+
+## v3.2.15
+
+### Bug fixes
+
+* [09aacf98a](https://github.com/api-platform/core/commit/09aacf98a2e4d0ffa00fbefa59cb2b31f35fbb54) fix(symfony): revert breaking change on attributes extractor (#6170)
+* [4138cb7c0](https://github.com/api-platform/core/commit/4138cb7c031b38731162d99b3d43754251fc5913) fix(openapi): resource name parameter description (#6178)
+* [5e4b6312a](https://github.com/api-platform/core/commit/5e4b6312a057ba4d1f45c395c7a215dc393acd80) fix(jsonschema): multiple type support (draft4) (#6171)
+* [8535f9def](https://github.com/api-platform/core/commit/8535f9def6fbd2baff9cedc79c34103940eb4fca) fix(doctrine): read parent class properties on PUT (#6176)
+* [a188c9473](https://github.com/api-platform/core/commit/a188c947396e0400ba6e1aadaa262d2e785fd941) fix(symfony): autoconfigure legacy alias fixes #6177 (#6181)
+* [e7b442149](https://github.com/api-platform/core/commit/e7b4421496b58f7c3db414d11dd357a8dc759323) fix(validator): stop considering properties marked with NotBlank(allowNull=true) as required (#6184)
+
+## v3.2.14
+
+### Bug fixes
+
+* [26295392d](https://github.com/api-platform/core/commit/26295392d5e70075b2951d27c633cf29d6fdf542) fix: use normalisation context when none is provided in ApiTestAssertionsTrait (#6157)
+* [2999d9ef1](https://github.com/api-platform/core/commit/2999d9ef14416b4cb8728ad713a9edd367df9816) fix: return null instead of exception for GraphQL Query operation (#6118)
+* [30f3f353e](https://github.com/api-platform/core/commit/30f3f353e2022ad6ec80733e90f209f326dc3225) fix(openapi): skip requestBody if input is false (#6163)
+* [507edba82](https://github.com/api-platform/core/commit/507edba822d80005345794cec1a946f9a7e0c12c) fix(symfony): autoconfiguration on UriVariableTransformerInterface (#6159)
+* [643cff2db](https://github.com/api-platform/core/commit/643cff2db8dbab050aa125eb32a347ad37a95e08) fix(symfony): throw metadata exception (#6164)
+* [a987469e0](https://github.com/api-platform/core/commit/a987469e09608d91afd4507ec1f6ceacbd8653b2) fix(openapi): method OpenApi::getComponents must always return a Components object (#6158)
+* [c08f1e164](https://github.com/api-platform/core/commit/c08f1e1642f4427269a7f684f0b3def34ba4c433) fix(doctrine): test array type existence before using it (#6161)
+
+## v3.2.13
+
+### Bug fixes
+
+* [05713bfc8](https://github.com/api-platform/core/commit/05713bfc8ca4e749d408aaf870a4880e6c8fa74f) fix(hydra): move owl:maxCardinality from JsonSchema to Hydra (#6136)
+
+## v3.2.12
+
+### Bug fixes
+
+* [1c1023a71](https://github.com/api-platform/core/commit/1c1023a71dd6ea9302c6065aade72f3e93deb6b6) fix: better generics support for State\ProcessorInterface (#6103)
+* [dcab6c79e](https://github.com/api-platform/core/commit/dcab6c79e96ccf8351d855013474d32d5cf129e5) fix(jsonschema): keep integer and number properties draft 4 compliant (#6098)
+* [ef4b261f1](https://github.com/api-platform/core/commit/ef4b261f1e4d67d064be9745d2b9e0c68d3032aa) fix(graphql): remove count query if paginationInfo is not requested (#6068)
+
+## v3.2.11
+
+### Bug fixes
+
+* [5de077e7d](https://github.com/api-platform/core/commit/5de077e7de94f2e07ca615efc5ecf1b32b37a10e) fix(symfony): use Type constraint violation code instead of exception code (#6064)
+* [804da1be7](https://github.com/api-platform/core/commit/804da1be73991e7c5efffb495345499943802102) fix(openapi): compatibility with OpenAPI 3.0 (#6065)
+* [cd01e043a](https://github.com/api-platform/core/commit/cd01e043a17f4092bf302a415bba777fab3a9cfc) fix(symfony): handle empty content-type as set by Symfony (#6078)
+* [d3484b0f1](https://github.com/api-platform/core/commit/d3484b0f1bf06e518c83cd15e67ed10e9a75fe03) fix(serializer): integrate root_resource_class to cache key (#6073)
+
+For OpenAPI 3.0, the `spec_version=3.0.0` query parameter will force OpenAPI to the 3.0 version. This option is also available through the command line.
+
+## v3.2.10
+
+### Bug fixes
+
+* [6f3c6a663](https://github.com/api-platform/core/commit/6f3c6a663cc55730580b82d146b8d62cac4f1bc5) fix(symfony): attribute filter names (#6062)
+* [dc77c7949](https://github.com/api-platform/core/commit/dc77c7949a6e8c48d57708d8f43027e00124388c) fix(symfony): disable symfony error handling by default
+* [f75649d49](https://github.com/api-platform/core/commit/f75649d49139e332bb739aece56a315943162770) fix(symfony): use Type constraint violation code instead of exception code
+
+## v3.2.9
+
+* [ecffcde](https://github.com/api-platform/core/pull/6063/commits/ecffcdeb0a27e49256c56502f6f6e327d9e03d5b) chore: remove comparator conflict wrongly introduced
+
+## v3.2.8
+
+### Bug fixes
+
+* [2a43268f9](https://github.com/api-platform/core/commit/2a43268f997e79a8407992c0bd7704a19d860479) fix(jsonschema): fix invalid "int" type to "integer" (#6049)
+* [9660a190a](https://github.com/api-platform/core/commit/9660a190a264102f7d1cfa1eae41f397ec559391) fix(serializer): concat context on wrong id (#6050)
+* [a35f0da11](https://github.com/api-platform/core/commit/a35f0da118444e7d735a37de5e918e8927a99b5e) fix(jsonld): remove link to ApiDocumentation when doc is disabled (#6029)
+* [a9a06897b](https://github.com/api-platform/core/commit/a9a06897b38a1b7a68db0e217d659d2dc5450851) fix(doctrine): get reference with identifier value (#6019)
+* [aac883e93](https://github.com/api-platform/core/commit/aac883e9331adac959c097796277e8a6d3e63ef0) fix(symfony): bypass symfony exception listener (#6056)
+* [b1926f533](https://github.com/api-platform/core/commit/b1926f533f4dd1f979285ac6bb26e339fe9d908f) fix(symfony): do not use metadata when merging schema constraints in Collection constraint (#6057)
+* [cc16a1ced](https://github.com/api-platform/core/commit/cc16a1ced3300a6080fbc428bade0291ca5bcb82) fix(jsonschema): iri example (#5901)
+* [ccf52c199](https://github.com/api-platform/core/commit/ccf52c19953874fbafbb398de0a3419244079f48) fix: item_uri_template conflict with context on relation (#6015)
+* [dcce75121](https://github.com/api-platform/core/commit/dcce75121153b32401d9301d8502d43ef46a8b17) fix(doctrine): OrderFilterTrait - properties null value causing error in foreach
+* [dcfd3c5ca](https://github.com/api-platform/core/commit/dcfd3c5ca34c4add63d299a8400f94795461c982) fix(jsonschema): keep format subschema generation (#6055)
+* [c13c88e5c](https://github.com/api-platform/core/commit/c13c88e5c2c8206664bda2d708e43c995968ae84) fix(metadata): throw exception if itemUriTemplate if used on invalid operation (xml/yaml formats) (#6053)
+
 ## v3.2.7
 
 Symfony 7 support.
@@ -227,6 +319,29 @@ Notes:
 * [851aa3778](https://github.com/api-platform/core/commit/851aa3778ef8a6f959a44b759fc343e9f8cfc8bf) feat(graphql)!: add extra args for custom queries or mutations (#5359)
 * [92a81f024](https://github.com/api-platform/core/commit/92a81f024541054b9322e7457b75c721261e14e0) feat(graphql): allow to disable the introspection query (#5711)
 * [d793ffb92](https://github.com/api-platform/core/commit/d793ffb9228a21655ee35f0b90a959f93281a4cf) feat: union/intersect types (#5470)
+
+## v3.1.25
+
+### Bug fixes
+
+* [5de077e7d](https://github.com/api-platform/core/commit/5de077e7de94f2e07ca615efc5ecf1b32b37a10e) fix(symfony): use Type constraint violation code instead of exception code (#6064)
+* [d3484b0f1](https://github.com/api-platform/core/commit/d3484b0f1bf06e518c83cd15e67ed10e9a75fe03) fix(serializer): integrate root_resource_class to cache key (#6073)
+
+## v3.1.24
+
+### Bug fixes
+
+* [9660a190a](https://github.com/api-platform/core/commit/9660a190a264102f7d1cfa1eae41f397ec559391) fix(serializer): concat context on wrong id (#6050)
+* [a9a06897b](https://github.com/api-platform/core/commit/a9a06897b38a1b7a68db0e217d659d2dc5450851) fix(doctrine): get reference with identifier value (#6019)
+* [cc16a1ced](https://github.com/api-platform/core/commit/cc16a1ced3300a6080fbc428bade0291ca5bcb82) fix(jsonschema): iri example (#5901)
+
+## v3.1.23
+
+### Bug fixes
+
+* [9848bd4d4](https://github.com/api-platform/core/commit/9848bd4d4917a97000119ee98a09916af469acd8) fix: missing eager joins on to-one relationships (#5992)
+* [d2f281eed](https://github.com/api-platform/core/commit/d2f281eedbd87a3c1a3377bb23a229e1b17a0f45) fix(jsonschema): fix recursive documentation when using a dto entity wrapper (#5973)
+* [dac49cb16](https://github.com/api-platform/core/commit/dac49cb16939ae14fa14eea1190cbf995bca842b) Revert "fix: missing eager joins on to-one relationships (#5992)"
 
 ## v3.1.22
 

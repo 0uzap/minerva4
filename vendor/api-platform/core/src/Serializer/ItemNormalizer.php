@@ -39,7 +39,7 @@ class ItemNormalizer extends AbstractItemNormalizer
 {
     private readonly LoggerInterface $logger;
 
-    public function __construct(PropertyNameCollectionFactoryInterface $propertyNameCollectionFactory, PropertyMetadataFactoryInterface $propertyMetadataFactory, IriConverterInterface $iriConverter, ResourceClassResolverInterface $resourceClassResolver, PropertyAccessorInterface $propertyAccessor = null, NameConverterInterface $nameConverter = null, ClassMetadataFactoryInterface $classMetadataFactory = null, LoggerInterface $logger = null, ResourceMetadataCollectionFactoryInterface $resourceMetadataFactory = null, ResourceAccessCheckerInterface $resourceAccessChecker = null, array $defaultContext = [])
+    public function __construct(PropertyNameCollectionFactoryInterface $propertyNameCollectionFactory, PropertyMetadataFactoryInterface $propertyMetadataFactory, IriConverterInterface $iriConverter, ResourceClassResolverInterface $resourceClassResolver, ?PropertyAccessorInterface $propertyAccessor = null, ?NameConverterInterface $nameConverter = null, ?ClassMetadataFactoryInterface $classMetadataFactory = null, ?LoggerInterface $logger = null, ?ResourceMetadataCollectionFactoryInterface $resourceMetadataFactory = null, ?ResourceAccessCheckerInterface $resourceAccessChecker = null, array $defaultContext = [])
     {
         parent::__construct($propertyNameCollectionFactory, $propertyMetadataFactory, $iriConverter, $resourceClassResolver, $propertyAccessor, $nameConverter, $classMetadataFactory, $defaultContext, $resourceMetadataFactory, $resourceAccessChecker);
 
@@ -51,7 +51,7 @@ class ItemNormalizer extends AbstractItemNormalizer
      *
      * @throws NotNormalizableValueException
      */
-    public function denormalize(mixed $data, string $class, string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $class, ?string $format = null, array $context = []): mixed
     {
         // Avoid issues with proxies if we populated the object
         if (isset($data['id']) && !isset($context[self::OBJECT_TO_POPULATE])) {
@@ -77,18 +77,20 @@ class ItemNormalizer extends AbstractItemNormalizer
         try {
             $context[self::OBJECT_TO_POPULATE] = $this->iriConverter->getResourceFromIri((string) $data['id'], $context + ['fetch_data' => true]);
         } catch (LegacyInvalidArgumentException|InvalidArgumentException) {
-            $operation = $this->resourceMetadataCollectionFactory->create($context['resource_class'])->getOperation();
+            $operation = $this->resourceMetadataCollectionFactory?->create($context['resource_class'])->getOperation();
             if (
-                null !== ($context['uri_variables'] ?? null)
-                && $operation instanceof HttpOperation
-                && \count($operation->getUriVariables() ?? []) > 1
+                !$operation || (
+                    null !== ($context['uri_variables'] ?? null)
+                    && $operation instanceof HttpOperation
+                    && \count($operation->getUriVariables() ?? []) > 1
+                )
             ) {
                 throw new InvalidArgumentException('Cannot find object to populate, use JSON-LD or specify an IRI at path "id".');
             }
             $uriVariables = $this->getContextUriVariables($data, $operation, $context);
             $iri = $this->iriConverter->getIriFromResource($context['resource_class'], UrlGeneratorInterface::ABS_PATH, $operation, ['uri_variables' => $uriVariables]);
 
-            $context[self::OBJECT_TO_POPULATE] = $this->iriConverter->getResourceFromIri($iri, ['fetch_data' => true]);
+            $context[self::OBJECT_TO_POPULATE] = $this->iriConverter->getResourceFromIri($iri, $context + ['fetch_data' => true]);
         }
     }
 

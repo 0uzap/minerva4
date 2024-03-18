@@ -35,7 +35,7 @@ final class NotExposedOperationResourceMetadataCollectionFactory implements Reso
     private $linkFactory;
     private $decorated;
 
-    public function __construct(LinkFactoryInterface $linkFactory, ResourceMetadataCollectionFactoryInterface $decorated = null)
+    public function __construct(LinkFactoryInterface $linkFactory, ?ResourceMetadataCollectionFactoryInterface $decorated = null)
     {
         $this->linkFactory = $linkFactory;
         $this->decorated = $decorated;
@@ -60,7 +60,7 @@ final class NotExposedOperationResourceMetadataCollectionFactory implements Reso
         foreach ($resourceMetadataCollection as $resource) {
             $operations = $resource->getOperations();
 
-            /** @var \ApiPlatform\Metadata\HttpOperation $operation */
+            /** @var HttpOperation $operation */
             foreach ($operations as $operation) {
                 // An item operation has been found, nothing to do anymore in this factory
                 if (('GET' === $operation->getMethod() && !$operation instanceof CollectionOperationInterface) || ($operation->getExtraProperties()['is_legacy_resource_metadata'] ?? false)) {
