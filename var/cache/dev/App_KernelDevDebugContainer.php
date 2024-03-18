@@ -16,6 +16,6 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerXMVSdF3\App_KernelDevDebugContainer([
     'container.build_hash' => 'XMVSdF3',
-    'container.build_id' => '04ad7219',
-    'container.build_time' => 1710753597,
+    'container.build_id' => '65f37e39',
+    'container.build_time' => 1710754599,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerXMVSdF3');
