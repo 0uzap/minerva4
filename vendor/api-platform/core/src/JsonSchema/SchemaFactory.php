@@ -33,16 +33,17 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-final class SchemaFactory implements SchemaFactoryInterface
+final class SchemaFactory implements SchemaFactoryInterface, SchemaFactoryAwareInterface
 {
     use ResourceClassInfoTrait;
     private array $distinctFormats = [];
     private ?TypeFactoryInterface $typeFactory = null;
+    private ?SchemaFactoryInterface $schemaFactory = null;
     // Edge case where the related resource is not readable (for example: NotExposed) but we have groups to read the whole related object
     public const FORCE_SUBSCHEMA = '_api_subschema_force_readable_link';
     public const OPENAPI_DEFINITION_NAME = 'openapi_definition_name';
 
-    public function __construct(?TypeFactoryInterface $typeFactory, ResourceMetadataCollectionFactoryInterface $resourceMetadataFactory, private readonly PropertyNameCollectionFactoryInterface $propertyNameCollectionFactory, private readonly PropertyMetadataFactoryInterface $propertyMetadataFactory, private readonly ?NameConverterInterface $nameConverter = null, ResourceClassResolverInterface $resourceClassResolver = null)
+    public function __construct(?TypeFactoryInterface $typeFactory, ResourceMetadataCollectionFactoryInterface $resourceMetadataFactory, private readonly PropertyNameCollectionFactoryInterface $propertyNameCollectionFactory, private readonly PropertyMetadataFactoryInterface $propertyMetadataFactory, private readonly ?NameConverterInterface $nameConverter = null, ?ResourceClassResolverInterface $resourceClassResolver = null)
     {
         if ($typeFactory) {
             $this->typeFactory = $typeFactory;
@@ -65,7 +66,7 @@ final class SchemaFactory implements SchemaFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function buildSchema(string $className, string $format = 'json', string $type = Schema::TYPE_OUTPUT, Operation $operation = null, Schema $schema = null, array $serializerContext = null, bool $forceCollection = false): Schema
+    public function buildSchema(string $className, string $format = 'json', string $type = Schema::TYPE_OUTPUT, ?Operation $operation = null, ?Schema $schema = null, ?array $serializerContext = null, bool $forceCollection = false): Schema
     {
         $schema = $schema ? clone $schema : new Schema();
 
@@ -217,7 +218,8 @@ final class SchemaFactory implements SchemaFactoryInterface
                 continue;
             }
 
-            $subSchema = $this->buildSchema($className, $format, $parentType, null, $subSchema, $serializerContext + [self::FORCE_SUBSCHEMA => true], false);
+            $subSchemaFactory = $this->schemaFactory ?: $this;
+            $subSchema = $subSchemaFactory->buildSchema($className, $format, $parentType, null, $subSchema, $serializerContext + [self::FORCE_SUBSCHEMA => true], false);
             if (!isset($subSchema['$ref'])) {
                 continue;
             }
@@ -241,7 +243,7 @@ final class SchemaFactory implements SchemaFactoryInterface
         $schema->getDefinitions()[$definitionName]['properties'][$normalizedPropertyName] = new \ArrayObject($propertySchema);
     }
 
-    private function buildDefinitionName(string $className, string $format = 'json', string $inputOrOutputClass = null, Operation $operation = null, array $serializerContext = null): string
+    private function buildDefinitionName(string $className, string $format = 'json', ?string $inputOrOutputClass = null, ?Operation $operation = null, ?array $serializerContext = null): string
     {
         if ($operation) {
             $prefix = $operation->getShortName();
@@ -277,7 +279,7 @@ final class SchemaFactory implements SchemaFactoryInterface
         return preg_replace('/[^a-zA-Z0-9.\-_]/', '.', $name);
     }
 
-    private function getMetadata(string $className, string $type = Schema::TYPE_OUTPUT, Operation $operation = null, array $serializerContext = null): ?array
+    private function getMetadata(string $className, string $type = Schema::TYPE_OUTPUT, ?Operation $operation = null, ?array $serializerContext = null): ?array
     {
         if (!$this->isResourceClass($className)) {
             return [
@@ -366,7 +368,7 @@ final class SchemaFactory implements SchemaFactoryInterface
     /**
      * Gets the options for the property name collection / property metadata factories.
      */
-    private function getFactoryOptions(array $serializerContext, array $validationGroups, HttpOperation $operation = null): array
+    private function getFactoryOptions(array $serializerContext, array $validationGroups, ?HttpOperation $operation = null): array
     {
         $options = [
             /* @see https://github.com/symfony/symfony/blob/v5.1.0/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php */
@@ -398,5 +400,10 @@ final class SchemaFactory implements SchemaFactoryInterface
         $parts = explode('\\', $fullyQualifiedName);
 
         return end($parts);
+    }
+
+    public function setSchemaFactory(SchemaFactoryInterface $schemaFactory): void
+    {
+        $this->schemaFactory = $schemaFactory;
     }
 }
