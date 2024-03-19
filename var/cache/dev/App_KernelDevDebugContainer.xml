@@ -537,6 +537,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\FaqRepository" class="App\Repository\FaqRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\GenreRepository" class="App\Repository\GenreRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -4308,7 +4312,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.nVZteL8"/>
+      <argument type="service" id=".service_locator.XZkYJX_"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6707,6 +6711,8 @@
     <service id=".abstract.instanceof.App\Form\TypeDeLivreType" class="App\Form\TypeDeLivreType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AjouterRepository" class="App\Repository\AjouterRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\AjouterRepository" class="App\Repository\AjouterRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\FaqRepository" class="App\Repository\FaqRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\FaqRepository" class="App\Repository\FaqRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\GenreRepository" class="App\Repository\GenreRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\GenreRepository" class="App\Repository\GenreRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\LivreRepository" class="App\Repository\LivreRepository" autowire="true" abstract="true"/>
@@ -7328,10 +7334,11 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.nVZteL8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XZkYJX_" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AjouterRepository" type="service_closure" id="App\Repository\AjouterRepository"/>
+        <argument key="App\Repository\FaqRepository" type="service_closure" id="App\Repository\FaqRepository"/>
         <argument key="App\Repository\GenreRepository" type="service_closure" id="App\Repository\GenreRepository"/>
         <argument key="App\Repository\LivreRepository" type="service_closure" id="App\Repository\LivreRepository"/>
         <argument key="App\Repository\PanierRepository" type="service_closure" id="App\Repository\PanierRepository"/>

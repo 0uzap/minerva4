@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -52,6 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Faq::class)]
+    private Collection $faqs;
+
+    public function __construct()
+    {
+        $this->faqs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +165,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Faq>
+     */
+    public function getFaqs(): Collection
+    {
+        return $this->faqs;
+    }
+
+    public function addFaq(Faq $faq): static
+    {
+        if (!$this->faqs->contains($faq)) {
+            $this->faqs->add($faq);
+            $faq->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaq(Faq $faq): static
+    {
+        if ($this->faqs->removeElement($faq)) {
+            // set the owning side to null (unless already changed)
+            if ($faq->getUser() === $this) {
+                $faq->setUser(null);
+            }
+        }
 
         return $this;
     }
