@@ -13,6 +13,7 @@
 			<link href="{{asset('style/carrouselCSS.css') }}" rel="stylesheet">
 			<link href="{{asset('style/checkbox.css') }}" rel="stylesheet">
 			<link href="{{asset('style/accordion.css') }}" rel="stylesheet">
+			<link href="{{asset('style/ajoutquestion.css') }}" rel="stylesheet">
 		{% endblock %}
 		<title>
 			{% block title %}Minerva -
@@ -43,7 +44,6 @@
 						</div>
 					</div>
 
-
 					<div class="nav-item col-0 ml-2">
 						<a class="text-secondary" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
 							<i class="bi bi-person-square" style="font-size: 2rem;"></i>
@@ -62,9 +62,7 @@
 								<li>
 									<a class="dropdown-item" href="{{path('monPanier')}}">Panier</a>
 								</li>
-								{#<li>
-																																									<a class="dropdown-item" href="{{path('mes-favorie')}}">Favorie</a>
-																																								</li>#}
+								{#<li>																															</li>#}
 								{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
 									<li>
 										<a class="dropdown-item" href="{{path('ajout')}}">Ajout</a>
@@ -169,6 +167,7 @@
 			<script src="{{asset('js/carrousel.js') }}"></script>
 			<script src="{{asset('js/checkbox.js') }}"></script>
 			<script src="{{asset('js/accordion.js') }}"></script>
+			<script src="{{asset('js/ajoutquestion.js') }}"></script>
 		{% endblock %}
 	</body>
 </html>

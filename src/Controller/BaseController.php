@@ -2,30 +2,29 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Form\ContactType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email; // cette ligne devient inutile
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use App\Entity\Contact;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Ajouter;
+use App\Entity\Contact;
+use App\Entity\Faq;
+use App\Entity\Genre;
+use App\Entity\Livre;
+use App\Entity\Panier;
+use App\Entity\Type;
 use App\Form\AjoutType;
+use App\Form\ContactType;
+use App\Form\FaqType;
 use App\Form\GenreType;
 use App\Form\TypeDeLivreType;
-use App\Entity\Livre;
-use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\Entity\Ajouter;
-use App\Entity\Panier;
-use App\Entity\Genre;
-use App\Entity\Type;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email; // cette ligne devient inutile
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BaseController extends AbstractController
 {
@@ -44,7 +43,7 @@ class BaseController extends AbstractController
         ]);
     }
 
-    #[Route('/contact', name: 'contact')] // étape 1
+    #[Route('/contact', name:'contact')] // étape 1
     public function contact(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManagerInterface): Response
     {
         $contact = new Contact();
@@ -220,11 +219,55 @@ class BaseController extends AbstractController
         return $this->redirectToRoute('monPanier');
     }
 
-    #[Route('/faq', name: 'faq')] // étape 1
-    public function faq(): Response // étape 2
+    #[Route('/faq', name: 'faq')]
+    public function faq(Request $request, EntityManagerInterface $emi): Response
     {
-        return $this->render('base/faq.html.twig', [ // étape 3
-            
+        $repoFaq = $emi->getRepository(Faq::class);
+        
+        $faq = $repoFaq->findAll();
+    
+        $form = $this->createForm(FaqType::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                // Récupérer la réponse à partir du formulaire
+                $reponse = $form->get('reponse')->getData();
+                // Parcourir chaque question faq et définir la réponse
+                foreach ($faq as $faqItem) {
+                    // Vérifier si la question n'a pas déjà de réponse
+                    if ($faqItem->getReponse() === null) {
+                        $faqItem->setReponse($reponse);
+                    }
+                }
+                $emi->flush();
+            }
+            return $this->redirectToRoute('faq');
+        }
+    
+        return $this->render('base/faq.html.twig', [
+            'form' => $form->createView(),
+            'faq' => $faq,
+        ]);
+    }
+    
+
+    #[Route('/faq/modifier/{id}', name: 'modifierFaq')]
+    public function modifierFaq(Request $request, EntityManagerInterface $emi): Response
+    {
+        $faq = $emi->getRepository(Faq::class)->find($id);
+
+        $modifForm = $this->createForm(ModifFaqType::class, $faq);  
+        $modifForm->handleRequest($request);
+        if ($modifForm->isSubmitted() && $modifForm->isValid()) {
+            $emi->flush();
+            $this->addFlash('notice', 'Réponse modifiée avec succès');
+            return $this->redirectToRoute('faq');
+        }
+
+        return $this->render('base/modifFaq.html.twig', [
+            'modifForm' => $modifForm->createView(), // 1
+            'modif' => $faq, // 2
         ]);
     }
 

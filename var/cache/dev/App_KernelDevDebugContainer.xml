@@ -512,19 +512,23 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SecurityController"/>
       </call>
     </service>
-    <service id="App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" autoconfigure="true">
-      <tag name="doctrine.fixture.orm"/>
-    </service>
     <service id="App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\FaqType" class="App\Form\FaqType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+      <argument type="service" id="security.helper"/>
+    </service>
     <service id="App\Form\GenreType" class="App\Form\GenreType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\LivreType" class="App\Form\LivreType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\ModifFaqType" class="App\Form\ModifFaqType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
@@ -596,7 +600,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator..ZZqFt."/>
+      <argument type="service" id=".service_locator.5MiEOgX"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1230,8 +1234,10 @@
       <argument type="collection">
         <argument>App\Form\AjoutType</argument>
         <argument>App\Form\ContactType</argument>
+        <argument>App\Form\FaqType</argument>
         <argument>App\Form\GenreType</argument>
         <argument>App\Form\LivreType</argument>
+        <argument>App\Form\ModifFaqType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\TypeDeLivreType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -2320,7 +2326,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator..ZZqFt."/>
+      <argument type="service" id=".service_locator.5MiEOgX"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -2871,7 +2877,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.mWY.Byw"/>
+      <argument type="service" id=".service_locator.2d2wbUo"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5679,12 +5685,7 @@
     <service id="doctrine.fixtures.loader" class="Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader">
       <argument type="service" id="service_container"/>
       <call method="addFixtures">
-        <argument type="collection">
-          <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\FaqFixtures"/>
-            <argument key="groups" type="collection"/>
-          </argument>
-        </argument>
+        <argument type="collection"/>
       </call>
     </service>
     <service id="doctrine.fixtures.purger.orm_purger_factory" class="Doctrine\Bundle\FixturesBundle\Purger\ORMPurgerFactory">
@@ -6695,16 +6696,18 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\FaqFixtures" class="App\DataFixtures\FaqFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\AjoutType" class="App\Form\AjoutType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContactType" class="App\Form\ContactType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FaqType" class="App\Form\FaqType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FaqType" class="App\Form\FaqType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\GenreType" class="App\Form\GenreType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\GenreType" class="App\Form\GenreType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\LivreType" class="App\Form\LivreType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\LivreType" class="App\Form\LivreType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ModifFaqType" class="App\Form\ModifFaqType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ModifFaqType" class="App\Form\ModifFaqType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TypeDeLivreType" class="App\Form\TypeDeLivreType" autowire="true" abstract="true"/>
@@ -7151,6 +7154,12 @@
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
+    <service id=".service_locator.2U9.rOp" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="emi" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7176,7 +7185,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator..ZZqFt." class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.5MiEOgX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\BaseController::BD" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -7187,9 +7196,11 @@
         <argument key="App\Controller\BaseController::classique" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\BaseController::contact" type="service_closure" id=".service_locator.fAuq5JK"/>
         <argument key="App\Controller\BaseController::detail" type="service_closure" id=".service_locator.cwjrQ4b"/>
+        <argument key="App\Controller\BaseController::faq" type="service_closure" id=".service_locator.2U9.rOp"/>
         <argument key="App\Controller\BaseController::favorie" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController::index" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController::manga" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\BaseController::modifierFaq" type="service_closure" id=".service_locator.2U9.rOp"/>
         <argument key="App\Controller\BaseController::monPanier" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController::mythe" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\BaseController::poesie" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -7211,9 +7222,11 @@
         <argument key="App\Controller\BaseController:classique" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\BaseController:contact" type="service_closure" id=".service_locator.fAuq5JK"/>
         <argument key="App\Controller\BaseController:detail" type="service_closure" id=".service_locator.cwjrQ4b"/>
+        <argument key="App\Controller\BaseController:faq" type="service_closure" id=".service_locator.2U9.rOp"/>
         <argument key="App\Controller\BaseController:favorie" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController:index" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController:manga" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\BaseController:modifierFaq" type="service_closure" id=".service_locator.2U9.rOp"/>
         <argument key="App\Controller\BaseController:monPanier" type="service_closure" id=".service_locator.cwjrQ4b"/>
         <argument key="App\Controller\BaseController:mythe" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\BaseController:poesie" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -7308,13 +7321,15 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.mWY.Byw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.2d2wbUo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AjoutType" type="service_closure" id="App\Form\AjoutType"/>
         <argument key="App\Form\ContactType" type="service_closure" id="App\Form\ContactType"/>
+        <argument key="App\Form\FaqType" type="service_closure" id="App\Form\FaqType"/>
         <argument key="App\Form\GenreType" type="service_closure" id="App\Form\GenreType"/>
         <argument key="App\Form\LivreType" type="service_closure" id="App\Form\LivreType"/>
+        <argument key="App\Form\ModifFaqType" type="service_closure" id="App\Form\ModifFaqType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\TypeDeLivreType" type="service_closure" id="App\Form\TypeDeLivreType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
@@ -8874,7 +8889,7 @@
     <service id="ApiPlatform\Symfony\Security\ResourceAccessCheckerInterface" alias="api_platform.security.resource_access_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator..ZZqFt."/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.5MiEOgX"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -8884,9 +8899,9 @@
     <service id=".service_locator.yFa02Ep" alias=".service_locator.fAuq5JK"/>
     <service id=".service_locator.dmBuyV3" alias=".service_locator.gRXaggr"/>
     <service id=".service_locator.V6D1oJY" alias=".service_locator.e_4zbH4"/>
-    <service id=".service_locator.S1TLzOe" alias=".service_locator..ZZqFt."/>
+    <service id=".service_locator.jVpSmSm" alias=".service_locator.5MiEOgX"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.w0VSpOE" alias=".service_locator.mWY.Byw"/>
+    <service id=".service_locator.2qNmZwz" alias=".service_locator.2d2wbUo"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="api_platform.metadata.resource.metadata_collection_factory.deprecations.inner" alias="api_platform.metadata.resource.metadata_collection_factory.attributes"/>
@@ -8959,6 +8974,7 @@
     <service id=".service_locator.3k_6xpk" alias=".service_locator.cwjrQ4b"/>
     <service id=".service_locator.pKa4DEi" alias=".service_locator.fAuq5JK"/>
     <service id=".service_locator.7VKzvLe" alias=".service_locator.gRXaggr"/>
+    <service id=".service_locator.m.SkzaU" alias=".service_locator.2U9.rOp"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
     <service id=".service_locator.qnm_CJ1" alias=".service_locator.e_4zbH4"/>
     <service id=".service_locator.025Wi8b" alias=".service_locator.kPUOGb8"/>

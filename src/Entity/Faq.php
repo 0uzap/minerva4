@@ -17,7 +17,7 @@ class Faq
     private ?string $question = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $réponse = null;
+    private ?string $reponse = null;
 
     #[ORM\ManyToOne(inversedBy: 'faqs')]
     #[ORM\JoinColumn(nullable: false)]
@@ -40,14 +40,14 @@ class Faq
         return $this;
     }
 
-    public function getRéponse(): ?string
+    public function getReponse(): ?string
     {
-        return $this->réponse;
+        return $this->reponse;
     }
 
-    public function setRéponse(?string $réponse): static
+    public function setReponse(?string $reponse): static
     {
-        $this->réponse = $réponse;
+        $this->reponse = $reponse;
 
         return $this;
     }

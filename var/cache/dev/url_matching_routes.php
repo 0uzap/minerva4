@@ -39,106 +39,110 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-                .'|/favorie/([^/]++)(*:24)'
-                .'|/detail/([^/]++)(*:47)'
+                .'|/fa(?'
+                    .'|vorie/([^/]++)(*:27)'
+                    .'|q/modifier/([^/]++)(*:53)'
+                .')'
+                .'|/detail/([^/]++)(*:77)'
                 .'|/a(?'
-                    .'|joutPanier/([^/]++)(*:78)'
+                    .'|joutPanier/([^/]++)(*:108)'
                     .'|pi(?'
-                        .'|/\\.well\\-known/genid/([^/]++)(*:119)'
-                        .'|(?:/(index)(?:\\.([^/]++))?)?(*:155)'
+                        .'|/\\.well\\-known/genid/([^/]++)(*:150)'
+                        .'|(?:/(index)(?:\\.([^/]++))?)?(*:186)'
                         .'|/(?'
-                            .'|docs(?:\\.([^/]++))?(*:186)'
-                            .'|contexts/([^.]+)(?:\\.(jsonld))?(*:225)'
+                            .'|docs(?:\\.([^/]++))?(*:217)'
+                            .'|contexts/([^.]+)(?:\\.(jsonld))?(*:256)'
                             .'|errors/([^/]++)(?'
-                                .'|(*:251)'
+                                .'|(*:282)'
                             .')'
                             .'|validation_errors/([^/]++)(?'
-                                .'|(*:289)'
+                                .'|(*:320)'
                             .')'
                             .'|genres(?'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:333)'
-                                .'|(?:\\.([^/]++))?(*:356)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:364)'
+                                .'|(?:\\.([^/]++))?(*:387)'
                             .')'
                             .'|livres(?'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:400)'
-                                .'|(?:\\.([^/]++))?(*:423)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:431)'
+                                .'|(?:\\.([^/]++))?(*:454)'
                             .')'
                             .'|paniers(?'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:468)'
-                                .'|(?:\\.([^/]++))?(*:491)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:499)'
+                                .'|(?:\\.([^/]++))?(*:522)'
                             .')'
                             .'|types(?'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:534)'
-                                .'|(?:\\.([^/]++))?(*:557)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:565)'
+                                .'|(?:\\.([^/]++))?(*:588)'
                             .')'
                             .'|users(?'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:600)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:631)'
                                 .'|(?:\\.([^/]++))?(?'
-                                    .'|(*:626)'
+                                    .'|(*:657)'
                                 .')'
-                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:661)'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:692)'
                             .')'
                         .')'
                     .')'
                 .')'
-                .'|/supprimerPanier/([^/]++)(*:698)'
+                .'|/supprimerPanier/([^/]++)(*:729)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:737)'
-                    .'|wdt/([^/]++)(*:757)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:768)'
+                    .'|wdt/([^/]++)(*:788)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:803)'
-                            .'|router(*:817)'
+                            .'|search/results(*:834)'
+                            .'|router(*:848)'
                             .'|exception(?'
-                                .'|(*:837)'
-                                .'|\\.css(*:850)'
+                                .'|(*:868)'
+                                .'|\\.css(*:881)'
                             .')'
                         .')'
-                        .'|(*:860)'
+                        .'|(*:891)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        24 => [[['_route' => 'favorie', '_controller' => 'App\\Controller\\BaseController::favorie'], ['id'], null, null, false, true, null]],
-        47 => [[['_route' => 'detail', '_controller' => 'App\\Controller\\BaseController::detail'], ['id'], null, null, false, true, null]],
-        78 => [[['_route' => 'ajoutPanier', '_controller' => 'App\\Controller\\BaseController::ajoutPanier'], ['id'], null, null, false, true, null]],
-        119 => [[['_route' => 'api_genid', '_controller' => 'api_platform.action.not_exposed', '_api_respond' => 'true'], ['id'], null, null, false, true, null]],
-        155 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
-        186 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
-        225 => [[['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null]],
-        251 => [
+        27 => [[['_route' => 'favorie', '_controller' => 'App\\Controller\\BaseController::favorie'], ['id'], null, null, false, true, null]],
+        53 => [[['_route' => 'modifierFaq', '_controller' => 'App\\Controller\\BaseController::modifierFaq'], ['id'], null, null, false, true, null]],
+        77 => [[['_route' => 'detail', '_controller' => 'App\\Controller\\BaseController::detail'], ['id'], null, null, false, true, null]],
+        108 => [[['_route' => 'ajoutPanier', '_controller' => 'App\\Controller\\BaseController::ajoutPanier'], ['id'], null, null, false, true, null]],
+        150 => [[['_route' => 'api_genid', '_controller' => 'api_platform.action.not_exposed', '_api_respond' => 'true'], ['id'], null, null, false, true, null]],
+        186 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
+        217 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
+        256 => [[['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null]],
+        282 => [
             [['_route' => '_api_errors_problem', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\State\\ApiResource\\Error', '_api_operation_name' => '_api_errors_problem'], ['status'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_errors_hydra', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\State\\ApiResource\\Error', '_api_operation_name' => '_api_errors_hydra'], ['status'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\State\\ApiResource\\Error', '_api_operation_name' => '_api_errors_jsonapi'], ['status'], ['GET' => 0], null, false, true, null],
         ],
-        289 => [
+        320 => [
             [['_route' => '_api_validation_errors_problem', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_problem'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_validation_errors_hydra', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_hydra'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_validation_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], ['id'], ['GET' => 0], null, false, true, null],
         ],
-        333 => [[['_route' => '_api_/genres/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Genre', '_api_operation_name' => '_api_/genres/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        356 => [[['_route' => '_api_/genres{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Genre', '_api_operation_name' => '_api_/genres{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
-        400 => [[['_route' => '_api_/livres/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Livre', '_api_operation_name' => '_api_/livres/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        423 => [[['_route' => '_api_/livres{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Livre', '_api_operation_name' => '_api_/livres{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
-        468 => [[['_route' => '_api_/paniers/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        491 => [[['_route' => '_api_/paniers{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
-        534 => [[['_route' => '_api_/types/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Type', '_api_operation_name' => '_api_/types/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        557 => [[['_route' => '_api_/types{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Type', '_api_operation_name' => '_api_/types{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
-        600 => [[['_route' => '_api_/users/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        626 => [
+        364 => [[['_route' => '_api_/genres/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Genre', '_api_operation_name' => '_api_/genres/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        387 => [[['_route' => '_api_/genres{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Genre', '_api_operation_name' => '_api_/genres{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
+        431 => [[['_route' => '_api_/livres/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Livre', '_api_operation_name' => '_api_/livres/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        454 => [[['_route' => '_api_/livres{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Livre', '_api_operation_name' => '_api_/livres{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
+        499 => [[['_route' => '_api_/paniers/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        522 => [[['_route' => '_api_/paniers{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
+        565 => [[['_route' => '_api_/types/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Type', '_api_operation_name' => '_api_/types/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        588 => [[['_route' => '_api_/types{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\Type', '_api_operation_name' => '_api_/types{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null]],
+        631 => [[['_route' => '_api_/users/{id}{._format}_get', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        657 => [
             [['_route' => '_api_/users{._format}_post', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users{._format}_post'], ['_format'], ['POST' => 0], null, false, true, null],
             [['_route' => '_api_/users{._format}_get_collection', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null],
         ],
-        661 => [[['_route' => '_api_/users/{id}{._format}_patch', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null]],
-        698 => [[['_route' => 'supp-panier', '_controller' => 'App\\Controller\\BaseController::supprimerPanier'], ['id'], null, null, false, true, null]],
-        737 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        757 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        803 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        817 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        837 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        850 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        860 => [
+        692 => [[['_route' => '_api_/users/{id}{._format}_patch', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null]],
+        729 => [[['_route' => 'supp-panier', '_controller' => 'App\\Controller\\BaseController::supprimerPanier'], ['id'], null, null, false, true, null]],
+        768 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        788 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        834 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        848 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        868 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        881 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        891 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

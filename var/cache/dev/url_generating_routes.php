@@ -12,6 +12,7 @@ return [
     'ajoutPanier' => [['id'], ['_controller' => 'App\\Controller\\BaseController::ajoutPanier'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/ajoutPanier']], [], [], []],
     'supp-panier' => [['id'], ['_controller' => 'App\\Controller\\BaseController::supprimerPanier'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/supprimerPanier']], [], [], []],
     'faq' => [[], ['_controller' => 'App\\Controller\\BaseController::faq'], [], [['text', '/faq']], [], [], []],
+    'modifierFaq' => [['id'], ['_controller' => 'App\\Controller\\BaseController::modifierFaq'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/faq/modifier']], [], [], []],
     'mentionslegales' => [[], ['_controller' => 'App\\Controller\\BaseController::mentionslegales'], [], [['text', '/mentionslegales']], [], [], []],
     'cgu' => [[], ['_controller' => 'App\\Controller\\BaseController::cgu'], [], [['text', '/cgu']], [], [], []],
     'charte' => [[], ['_controller' => 'App\\Controller\\BaseController::charte'], [], [['text', '/charte']], [], [], []],
