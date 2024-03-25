@@ -98,6 +98,8 @@ return [[
 '[C]App%5CController%5CBaseController%23supprimerPanier' => 1,
 'App%5CController%5CBaseController%23faq' => 0,
 '[C]App%5CController%5CBaseController%23faq' => 1,
+'App%5CController%5CBaseController%23modifierFaq' => 0,
+'[C]App%5CController%5CBaseController%23modifierFaq' => 1,
 'App%5CController%5CBaseController%23mentionslegales' => 0,
 '[C]App%5CController%5CBaseController%23mentionslegales' => 1,
 'App%5CController%5CBaseController%23cgu' => 0,
@@ -962,6 +964,6 @@ return [[
 ], [
 
 0 => [],
-1 => 1710968566,
+1 => 1711387355,
 
 ]];
